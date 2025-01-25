@@ -18,6 +18,9 @@ import (
 // https://github.com/veryhappytree/go-boilerplate/
 // https://stackoverflow.com/questions/64510093/gorm-migration-using-golang-migrate-migrate
 
+// https://learn.microsoft.com/en-us/graph/outlook-change-notifications-overview
+// https://learn.microsoft.com/en-us/graph/use-the-api
+
 func main() {
 	config.LoadConfig()
 	database.SetupDatabase()

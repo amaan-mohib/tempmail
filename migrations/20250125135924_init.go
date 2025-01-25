@@ -14,10 +14,10 @@ func init() {
 func upInit(ctx context.Context, tx *sql.Tx) error {
 	_, err := tx.ExecContext(ctx,
 		`create table if not exists aliases (
-			id INT primary key,
+			id SERIAL primary key,
 			alias varchar(255) NOT NULL,
-			created_at_ts INT NOT NULL,
-			expiry_at INT,
+			created_at_ts BIGINT NOT NULL,
+			expiry_at BIGINT,
 			created_at TIMESTAMP DEFAULT NOW(),
 			updated_at TIMESTAMP DEFAULT NOW()
 		)`)
