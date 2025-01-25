@@ -2,8 +2,8 @@ package routes
 
 import (
 	"net/http"
-	"tempmail/src/config"
-	"tempmail/src/types"
+	"tempgalias/src/config"
+	"tempgalias/src/types"
 
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/go-chi/render"

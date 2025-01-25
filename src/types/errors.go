@@ -2,6 +2,7 @@ package types
 
 import (
 	"net/http"
+	"tempgalias/src/utils"
 
 	"github.com/go-chi/render"
 )
@@ -34,6 +35,14 @@ func ErrInvalidRequest(err error) render.Renderer {
 		Err:            err,
 		HTTPStatusCode: 400,
 		StatusText:     "Invalid request.",
+		ErrorText:      err.Error(),
+	}
+}
+func ErrInvalidRequestWithMessage(err error, message string) render.Renderer {
+	return &ErrResponse{
+		Err:            err,
+		HTTPStatusCode: 400,
+		StatusText:     utils.InlineIf(message != "", message, "Invalid request."),
 		ErrorText:      err.Error(),
 	}
 }

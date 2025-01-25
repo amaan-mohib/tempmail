@@ -6,8 +6,9 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"tempmail/src/config"
-	"tempmail/src/routes"
+	"tempgalias/src/config"
+	"tempgalias/src/database"
+	"tempgalias/src/routes"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -19,6 +20,7 @@ import (
 
 func main() {
 	config.LoadConfig()
+	database.SetupDatabase()
 
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
@@ -34,15 +36,16 @@ func main() {
 		r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			w.Write([]byte("Hello World!"))
 		})
-		r.Post("/login", routes.LoginHandler)
+		r.Post("/get-alias", routes.GetAliasHandler)
 	})
 
 	http.ListenAndServe(":3000", r)
 
 	gracefulShutdown(
-		// func() error {
-		// 	return database.DBConnection.Close()
-		// },
+		func() error {
+			database.DB.Close()
+			return nil
+		},
 		// func() error {
 		// 	return redis.Client.Close()
 		// },
